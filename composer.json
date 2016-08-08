@@ -15,6 +15,12 @@
             "email": "uyab.exe@gmail.com",
             "homepage": "http://id-laravel.com",
             "role": "Developer"
+        },
+        {
+            "name": "Ramadani",
+            "email": "email.ramadani@gmail.com",
+            "homepage": "http://daniramadani.web.id",
+            "role": "Developer"
         }
     ],
     "require": {
