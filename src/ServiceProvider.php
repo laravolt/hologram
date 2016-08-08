@@ -34,7 +34,9 @@ class ServiceProvider extends BaseServiceProvider
      */
     public function register()
     {
-
+        $this->app->bind('laravolt.hologram', function(){
+            return new Hologram();
+        });
     }
 
     /**
@@ -46,7 +48,7 @@ class ServiceProvider extends BaseServiceProvider
     public function boot()
     {
         $this->loadRequiredProviders();
-        
+
         $this->registerViews();
         $this->registerTranslations();
         $this->registerConfigurations();
@@ -55,8 +57,8 @@ class ServiceProvider extends BaseServiceProvider
             $this->registerRoutes();
         }
 
-        $repository = config('laravolt.hologram.repository');
-        $this->app->bind(LogRepositoryInterface::class, $repository);
+        //$repository = config('laravolt.hologram.repository');
+        //$this->app->bind(LogRepositoryInterface::class, $repository);
 
     }
 
