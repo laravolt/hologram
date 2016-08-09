@@ -14,13 +14,14 @@ class Hologram
 
     protected $latest = true;
 
+    protected $keyword;
+
     /**
      * Hologram constructor.
      */
     public function __construct()
     {
         $this->attributes = new Collection();
-        $this->attributes['id'] = $this->generateRandomId();
     }
 
 
@@ -38,22 +39,41 @@ class Hologram
         return $this;
     }
 
+    public function search($keyword)
+    {
+        $this->keyword = $keyword;
+
+        return $this;
+    }
+
+    public function latest($latest = true)
+    {
+        $this->latest = $latest;
+
+        return $this;
+    }
+
     public function renderAsWidget()
     {
-        $logs = $this->getData();
+        $this->attributes['id'] = $this->generateRandomId();
+
         $attributes = $this->renderAttributes();
         $id = $this->attributes['id'];
 
+        $logs = $this->getData();
         return view('hologram::widget', compact('logs', 'id', 'attributes'));
     }
 
     public function renderAsTable()
     {
-        $logs = $this->getData();
+        $this->attributes['id'] = $this->generateRandomId();
+
+        $this->keyword = request('search');
         $suitable = app('laravolt.suitable');
         $attributes = $this->renderAttributes();
         $id = $this->attributes['id'];
 
+        $logs = $this->getData();
         return view('hologram::table', compact('logs', 'suitable', 'id', 'attributes'));
     }
 
@@ -65,13 +85,6 @@ class Hologram
     public function attr($key, $value)
     {
         $this->attributes[$key] = $value;
-
-        return $this;
-    }
-
-    public function latest($latest = true)
-    {
-        $this->latest = $latest;
 
         return $this;
     }
@@ -92,6 +105,10 @@ class Hologram
             $this->attributes['data-by_id'] = $this->performedBy->getKey();
         }
 
+        if ($this->keyword) {
+            $model = $model->search($this->keyword);
+        }
+
         if ($this->latest) {
             $model = $model->latest();
         }
@@ -100,6 +117,8 @@ class Hologram
         $data = new \League\Fractal\Resource\Collection($logs, app(config('laravolt.hologram.transformer')));
         $manager = new Manager();
         $result = $manager->createData($data)->toArray();
+
+        $this->reset();
 
         return $result['data'];
     }
@@ -120,4 +139,9 @@ class Hologram
         return $result;
     }
 
+    protected function reset()
+    {
+        $this->performedBy = $this->performedOn = $this->keyword = null;
+        $this->attributes = new Collection();
+    }
 }

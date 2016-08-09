@@ -17,4 +17,9 @@ class Activity extends \Spatie\Activitylog\Models\Activity
         return $query->where('subject_type', get_class($model))
                      ->where('subject_id', $model->getKey());
     }
+
+    public function scopeSearch(Builder $query, $keyword)
+    {
+        return $query->where('description', 'like', "%$keyword%");
+    }
 }
