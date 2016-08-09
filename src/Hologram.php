@@ -12,7 +12,7 @@ class Hologram
 
     protected $performedOn;
 
-    protected $latest = false;
+    protected $latest = true;
 
     /**
      * Hologram constructor.
@@ -69,9 +69,9 @@ class Hologram
         return $this;
     }
 
-    public function latest()
+    public function latest($latest = true)
     {
-        $this->latest = true;
+        $this->latest = $latest;
 
         return $this;
     }
