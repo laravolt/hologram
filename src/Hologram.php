@@ -14,6 +14,9 @@ class Hologram
 
     protected $keyword;
 
+    protected $latest = false;
+
+
     /**
      * Hologram constructor.
      */
@@ -80,6 +83,13 @@ class Hologram
         return $this;
     }
 
+    public function latest()
+    {
+        $this->latest = true;
+
+        return $this;
+    }
+
     public function getData()
     {
         $model = new Activity();
@@ -100,12 +110,16 @@ class Hologram
             $model = $model->search($this->keyword);
         }
 
-        $this->reset();
+        if ($this->latest) {
+            $model = $model->latest();
+        }
 
         $logs = $model->paginate();
         $data = new \League\Fractal\Resource\Collection($logs, app(config('laravolt.hologram.transformer')));
         $manager = new Manager();
         $result = $manager->createData($data)->toArray();
+
+        $this->reset();
 
         return $result['data'];
     }
