@@ -12,6 +12,8 @@ class Hologram
 
     protected $performedOn;
 
+    protected $latest = false;
+
     /**
      * Hologram constructor.
      */
@@ -67,6 +69,13 @@ class Hologram
         return $this;
     }
 
+    public function latest()
+    {
+        $this->latest = true;
+
+        return $this;
+    }
+
     public function getData()
     {
         $model = new Activity();
@@ -81,6 +90,10 @@ class Hologram
             $model = $model->by($this->performedBy);
             $this->attributes['data-by_type'] = get_class($this->performedBy);
             $this->attributes['data-by_id'] = $this->performedBy->getKey();
+        }
+
+        if ($this->latest) {
+            $model = $model->latest();
         }
 
         $logs = $model->paginate();
