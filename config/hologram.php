@@ -13,5 +13,5 @@ return [
         'layout'  => 'hologram::layout',
         'section' => 'body',
     ],
-    'repository' => \Laravolt\Hologram\Repositories\EloquentLogRepository::class,
+    'transformer' => \Laravolt\Hologram\Transformer::class,
 ];

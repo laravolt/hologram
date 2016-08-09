@@ -2,6 +2,7 @@
 namespace Laravolt\Hologram;
 
 use Illuminate\Support\Collection;
+use League\Fractal\Manager;
 
 class Hologram
 {
@@ -82,7 +83,12 @@ class Hologram
             $this->attributes['data-by_id'] = $this->performedBy->getKey();
         }
 
-        return $model->paginate();
+        $logs = $model->paginate();
+        $data = new \League\Fractal\Resource\Collection($logs, app(config('laravolt.hologram.transformer')));
+        $manager = new Manager();
+        $result = $manager->createData($data)->toArray();
+
+        return $result['data'];
     }
 
     protected function generateRandomId()

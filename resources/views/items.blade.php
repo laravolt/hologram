@@ -1,10 +1,10 @@
 @foreach($logs as $log)
     <div class="content">
         <div class="meta">
-            {{ $log->created_at->diffForHumans() }}
+            {{ $log['time'] }}
         </div>
         <div class="description">
-            {{ $log->description }}
+            {{ $log['description']}}
         </div>
     </div>
 @endforeach
