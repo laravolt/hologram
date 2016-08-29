@@ -8,5 +8,8 @@ return [
         'by'       => 'By',
         'on'       => 'On',
         'time'     => 'Time',
+        'changes'  => 'Changes',
+        'old'      => 'Old',
+        'new'      => 'New',
     ],
 ];

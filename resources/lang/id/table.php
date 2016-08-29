@@ -8,5 +8,8 @@ return [
         'by'       => 'Oleh',
         'on'       => 'Pada',
         'time'     => 'Waktu',
+        'changes'  => 'Perubahan',
+        'old'      => 'Lama',
+        'new'      => 'Baru',
     ],
 ];
