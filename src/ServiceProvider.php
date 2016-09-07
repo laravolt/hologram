@@ -102,7 +102,7 @@ class ServiceProvider extends BaseServiceProvider
             $this->packagePath('config/hologram.php'), 'laravolt.hologram'
         );
         $this->publishes([
-            $this->packagePath('config/config.php') => config_path('laravolt/hologram.php'),
+            $this->packagePath('config/hologram.php') => config_path('laravolt/hologram.php'),
         ], 'config');
     }
 

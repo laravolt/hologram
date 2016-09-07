@@ -110,7 +110,7 @@ class Hologram
         }
 
         if ($this->latest) {
-            $model = $model->latest();
+            $model = $model->orderBy('id', 'desc');
         }
 
         $logs = $model->paginate();
