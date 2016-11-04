@@ -33,6 +33,11 @@ class HologramController extends Controller
         if(request()->ajax()) {
             return view('hologram::items', compact('logs'));
         }
+
+        $suitable = app('laravolt.suitable');
+        $collection = $logs;
+
+        return view('hologram::index', compact('collection', 'suitable'));
     }
 
 }

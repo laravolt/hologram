@@ -3,7 +3,7 @@
 namespace Laravolt\Hologram;
 
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
-use Laravolt\Hologram\Repositories\LogRepositoryInterface;
+//use Laravolt\Hologram\Repositories\LogRepositoryInterface;
 
 /**
  * Class PackageServiceProvider
@@ -24,6 +24,7 @@ class ServiceProvider extends BaseServiceProvider
 
     protected $requiredProviders = [
         \Laravolt\Suitable\ServiceProvider::class,
+        \Spatie\Activitylog\ActivitylogServiceProvider::class,
     ];
 
     /**

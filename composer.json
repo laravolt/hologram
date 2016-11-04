@@ -26,6 +26,7 @@
     "require": {
         "php" : ">=5.5.0",
         "illuminate/support": "~5.2",
+        "spatie/laravel-activitylog": "~1.10",
         "laravolt/suitable": "^1.0|^2.0",
         "league/fractal": "^0.13.0"
     },
